@@ -1,0 +1,150 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(run 0, Some(8c3cd459-fd15-47ce-9b68-b8721aca670b), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / run[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 6 Scala sources to /home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/target/scala-2.12/classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0mNon-compiled module 'compiler-bridge_2.12' for Scala 2.12.12. Compiling...[0m
+[0m[[0m[0minfo[0m] [0m[0m  Compilation completed in 8.7s.[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/BeatActor.scala:8:8: not found: object akka[0m
+[0m[[0m[31merror[0m] [0m[0mimport akka.actor._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/BeatActor.scala:9:8: not found: object akka[0m
+[0m[[0m[31merror[0m] [0m[0mimport akka.io._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/BeatActor.scala:10:8: not found: object akka[0m
+[0m[[0m[31merror[0m] [0m[0mimport akka.util.Timeout[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/BeatActor.scala:22:38: not found: type Actor[0m
+[0m[[0m[31merror[0m] [0m[0mclass BeatActor (val id:Int) extends Actor {[0m
+[0m[[0m[31merror[0m] [0m[0m                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/BeatActor.scala:25:19: not found: value context[0m
+[0m[[0m[31merror[0m] [0m[0m     val father = context.parent[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/BeatActor.scala:28:19: missing parameter type for expanded function[0m
+[0m[[0m[31merror[0m] [0m[0mThe argument types of an anonymous function must be fully known. (SLS 8.5)[0m
+[0m[[0m[31merror[0m] [0m[0mExpected type was: ?[0m
+[0m[[0m[31merror[0m] [0m[0m    def receive = {[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/BeatActor.scala:32:14: not found: value self[0m
+[0m[[0m[31merror[0m] [0m[0m             self ! BeatTick[0m
+[0m[[0m[31merror[0m] [0m[0m             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/CheckerActor.scala:6:8: not found: object akka[0m
+[0m[[0m[31merror[0m] [0m[0mimport akka.actor._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/CheckerActor.scala:14:95: not found: type Actor[0m
+[0m[[0m[31merror[0m] [0m[0mclass CheckerActor (val id:Int, val terminaux:List[Terminal], electionActor:ActorRef) extends Actor {[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/CheckerActor.scala:14:77: not found: type ActorRef[0m
+[0m[[0m[31merror[0m] [0m[0mclass CheckerActor (val id:Int, val terminaux:List[Terminal], electionActor:ActorRef) extends Actor {[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/CheckerActor.scala:17:19: not found: value context[0m
+[0m[[0m[31merror[0m] [0m[0m     val father = context.parent[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/CheckerActor.scala:25:19: missing parameter type for expanded function[0m
+[0m[[0m[31merror[0m] [0m[0mThe argument types of an anonymous function must be fully known. (SLS 8.5)[0m
+[0m[[0m[31merror[0m] [0m[0mExpected type was: ?[0m
+[0m[[0m[31merror[0m] [0m[0m    def receive = {[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/CheckerActor.scala:29:14: not found: value self[0m
+[0m[[0m[31merror[0m] [0m[0m             self ! CheckerTick[0m
+[0m[[0m[31merror[0m] [0m[0m             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:3:8: not found: object akka[0m
+[0m[[0m[31merror[0m] [0m[0mimport akka.actor._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/DisplayActor.scala:3:8: not found: object akka[0m
+[0m[[0m[31merror[0m] [0m[0mimport akka.actor._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/DisplayActor.scala:7:28: not found: type Actor[0m
+[0m[[0m[31merror[0m] [0m[0mclass DisplayActor extends Actor {[0m
+[0m[[0m[31merror[0m] [0m[0m                           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/DisplayActor.scala:9:20: missing parameter type for expanded function[0m
+[0m[[0m[31merror[0m] [0m[0mThe argument types of an anonymous function must be fully known. (SLS 8.5)[0m
+[0m[[0m[31merror[0m] [0m[0mExpected type was: ?[0m
+[0m[[0m[31merror[0m] [0m[0m     def receive = {[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/ElectionActor.scala:3:8: not found: object akka[0m
+[0m[[0m[31merror[0m] [0m[0mimport akka.actor._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/ElectionActor.scala:20:72: not found: type Actor[0m
+[0m[[0m[31merror[0m] [0m[0mclass ElectionActor (val id:Int, val terminaux:List[Terminal]) extends Actor {[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/ElectionActor.scala:22:19: not found: value context[0m
+[0m[[0m[31merror[0m] [0m[0m     val father = context.parent[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/ElectionActor.scala:29:20: missing parameter type for expanded function[0m
+[0m[[0m[31merror[0m] [0m[0mThe argument types of an anonymous function must be fully known. (SLS 8.5)[0m
+[0m[[0m[31merror[0m] [0m[0mExpected type was: ?[0m
+[0m[[0m[31merror[0m] [0m[0m     def receive = {[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/ElectionActor.scala:33:16: not found: value self[0m
+[0m[[0m[31merror[0m] [0m[0m               self ! Initiate[0m
+[0m[[0m[31merror[0m] [0m[0m               ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/ElectionActor.scala:45:16: not found: value self[0m
+[0m[[0m[31merror[0m] [0m[0m               self ! Initiate[0m
+[0m[[0m[31merror[0m] [0m[0m               ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:15:63: not found: type Actor[0m
+[0m[[0m[31merror[0m] [0m[0mclass Node (val id:Int, val terminaux:List[Terminal]) extends Actor {[0m
+[0m[[0m[31merror[0m] [0m[0m                                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:18:26: not found: value context[0m
+[0m[[0m[31merror[0m] [0m[0m     val electionActor = context.actorOf(Props(new ElectionActor(this.id, terminaux)), name = "electionActor")[0m
+[0m[[0m[31merror[0m] [0m[0m                         ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:18:42: not found: value Props[0m
+[0m[[0m[31merror[0m] [0m[0m     val electionActor = context.actorOf(Props(new ElectionActor(this.id, terminaux)), name = "electionActor")[0m
+[0m[[0m[31merror[0m] [0m[0m                                         ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:18:88: not found: value name[0m
+[0m[[0m[31merror[0m] [0m[0m     val electionActor = context.actorOf(Props(new ElectionActor(this.id, terminaux)), name = "electionActor")[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:19:25: not found: value context[0m
+[0m[[0m[31merror[0m] [0m[0m     val checkerActor = context.actorOf(Props(new CheckerActor(this.id, terminaux, electionActor)), name = "checkerActor")[0m
+[0m[[0m[31merror[0m] [0m[0m                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:19:41: not found: value Props[0m
+[0m[[0m[31merror[0m] [0m[0m     val checkerActor = context.actorOf(Props(new CheckerActor(this.id, terminaux, electionActor)), name = "checkerActor")[0m
+[0m[[0m[31merror[0m] [0m[0m                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:19:101: not found: value name[0m
+[0m[[0m[31merror[0m] [0m[0m     val checkerActor = context.actorOf(Props(new CheckerActor(this.id, terminaux, electionActor)), name = "checkerActor")[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:20:22: not found: value context[0m
+[0m[[0m[31merror[0m] [0m[0m     val beatActor = context.actorOf(Props(new BeatActor(this.id)), name = "beatActor")[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:20:38: not found: value Props[0m
+[0m[[0m[31merror[0m] [0m[0m     val beatActor = context.actorOf(Props(new BeatActor(this.id)), name = "beatActor")[0m
+[0m[[0m[31merror[0m] [0m[0m                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:20:69: not found: value name[0m
+[0m[[0m[31merror[0m] [0m[0m     val beatActor = context.actorOf(Props(new BeatActor(this.id)), name = "beatActor")[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:21:25: not found: value context[0m
+[0m[[0m[31merror[0m] [0m[0m     val displayActor = context.actorOf(Props[DisplayActor], name = "displayActor")[0m
+[0m[[0m[31merror[0m] [0m[0m                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:21:41: not found: value Props[0m
+[0m[[0m[31merror[0m] [0m[0m     val displayActor = context.actorOf(Props[DisplayActor], name = "displayActor")[0m
+[0m[[0m[31merror[0m] [0m[0m                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:21:62: not found: value name[0m
+[0m[[0m[31merror[0m] [0m[0m     val displayActor = context.actorOf(Props[DisplayActor], name = "displayActor")[0m
+[0m[[0m[31merror[0m] [0m[0m                                                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:23:24: not found: type ActorSelection[0m
+[0m[[0m[31merror[0m] [0m[0m     var allNodes:List[ActorSelection] = List()[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:25:20: missing parameter type for expanded function[0m
+[0m[[0m[31merror[0m] [0m[0mThe argument types of an anonymous function must be fully known. (SLS 8.5)[0m
+[0m[[0m[31merror[0m] [0m[0mExpected type was: ?[0m
+[0m[[0m[31merror[0m] [0m[0m     def receive = {[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Projet.scala:4:8: not found: object akka[0m
+[0m[[0m[31merror[0m] [0m[0mimport akka.actor._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Node.scala:36:39: not found: value context[0m
+[0m[[0m[31merror[0m] [0m[0m                         val remote = context.actorSelection("akka.tcp://LeaderSystem" + n.id + "@" + n.ip + ":" + n.port + "/user/Node")[0m
+[0m[[0m[31merror[0m] [0m[0m                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Projet.scala:3:12: object typesafe is not a member of package com[0m
+[0m[[0m[31merror[0m] [0m[0mimport com.typesafe.config.ConfigFactory[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Projet.scala:33:24: not found: value ActorSystem[0m
+[0m[[0m[31merror[0m] [0m[0m          val system = ActorSystem("LeaderSystem" + id, ConfigFactory.load().getConfig("system" + id))[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/adel/Dev/PPC/Projet_code/Projet_code/src/main/scala/Projet.scala:33:57: not found: value ConfigFactory[0m
+[0m[[0m[31merror[0m] [0m[0m          val system = ActorSystem("LeaderSystem" + id, ConfigFactory.load().getConfig("system" + id))[0m
+[0m[[0m[31merror[0m] [0m[0m                                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m43 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 11 s, completed 6 janv. 2021 à 11:50:42[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
+[0m[[0m[0minfo[0m] [0m[0mshutting down sbt server[0m
