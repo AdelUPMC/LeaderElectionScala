@@ -31,12 +31,13 @@ class Node (val id:Int, val terminaux:List[Terminal]) extends Actor {
                beatActor ! Start
 
                // Initilisation des autres remote, pour communiquer avec eux
-               terminaux.foreach(n => {
+               terminaux.foreach(n => { 
                     if (n.id != id) {
                          val remote = context.actorSelection("akka.tcp://LeaderSystem" + n.id + "@" + n.ip + ":" + n.port + "/user/Node")
                          // Mise a jour de la liste des nodes
                          this.allNodes = this.allNodes:::List(remote)
                     }
+               
                })
           }
 
@@ -45,17 +46,33 @@ class Node (val id:Int, val terminaux:List[Terminal]) extends Actor {
                displayActor ! Message (content)
           }
 
-          case BeatLeader (nodeId) => 
+          case BeatLeader (nodeId) => {
+               this.allNodes.foreach(n => {
+                    n ! IsAliveLeader(nodeId)
+               })
+               checkerActor ! IsAliveLeader(nodeId)
+          }
 
-          case Beat (nodeId) => 
+          case Beat (nodeId) => {
+               this.allNodes.foreach(n => {
+                    n ! IsAlive(nodeId)
+               })
+               checkerActor ! IsAlive(nodeId)
+          }
 
           // Messages venant des autres nodes : pour nous dire qui est encore en vie ou mort
-          case IsAlive (id) => 
+          case IsAlive (id) => {
+               this.checkerActor ! IsAlive(id)
+          }
 
-          case IsAliveLeader (id) => 
+          case IsAliveLeader (id) => {
+               this.checkerActor ! IsAliveLeader(id)
+          }
 
           // Message indiquant que le leader a change
-          case LeaderChanged (nodeId) => 
+          case LeaderChanged (nodeId) => {
+               this.beatActor ! LeaderChanged(nodeId)
+          }
 
      }
 

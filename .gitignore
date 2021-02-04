@@ -1,8 +1,8 @@
 # sbt
 # (may want to keep parts of 'project')
 bin/
-project/
-target/
+project/*
+target/*
 build/
 .bsp
 
@@ -30,4 +30,4 @@ build
 .cache-main
 
 #general
-*.class
+*/**/*.class

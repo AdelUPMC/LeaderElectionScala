@@ -1,0 +1,6 @@
+[0m[[0m[31merror[0m] [0m[0m/home/xian/APP/Projets/M2-S1/PPC/LeaderElectionScala/src/main/scala/Node.scala:23:47: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : akka.actor.ActorRef[0m
+[0m[[0m[31merror[0m] [0m[0m required: akka.actor.ActorSelection[0m
+[0m[[0m[31merror[0m] [0m[0m     var allNodes:List[ActorSelection] = List(self)[0m
+[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

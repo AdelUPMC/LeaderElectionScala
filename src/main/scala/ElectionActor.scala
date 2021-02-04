@@ -30,7 +30,8 @@ class ElectionActor (val id:Int, val terminaux:List[Terminal]) extends Actor {
 
           // Initialisation
           case Start => {
-               self ! Initiate
+               father ! Message("algo start")
+               // self ! Initiate
           }
 
           case StartWithNodeList (list) => {
