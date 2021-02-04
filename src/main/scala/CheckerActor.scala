@@ -20,13 +20,14 @@ class CheckerActor (val id:Int, val terminaux:List[Terminal], electionActor:Acto
      var datesForChecking:List[Date] = List()
      var lastDate:Date = null
 
+     var maxTicks = 15;
+     var curTicks = 0;
      var leader : Int = -1
 
      def receive = {
 
           // Initialisation
           case Start => {
-               Thread.sleep(2000)
                self ! CheckerTick
           }
 
@@ -58,16 +59,22 @@ class CheckerActor (val id:Int, val terminaux:List[Terminal], electionActor:Acto
           // Objectif : lancer l'election si le leader est mort
           case CheckerTick => {
                var msg = "leader=" + this.leader + ", nodesAlive: " + nodesAlive.toString()
-               var contains = false
-               this.nodesAlive.foreach( n=>{
-                    if(n == this.leader) contains = true
-               })
                father ! Message(msg)
-               if(!contains) {
-                    electionActor ! Start
+               // Check if this node is leader
+               var contains = this.id == this.leader
+               // Check if leader in list alive
+               if(!contains){
+                    this.nodesAlive.foreach( n=>{
+                         if(n == this.leader) contains = true
+                    })
                }
+               // We haven't leader's message in maxTicks, we confirm that leader was dead
+               if(curTicks == maxTicks - 1) {
+                    if(!contains) electionActor ! Start
+                    this.nodesAlive = List()
+               }
+               curTicks = (curTicks + 1) % maxTicks
                Thread.sleep(time)
-               this.nodesAlive = List()
                self ! CheckerTick
           }
 
