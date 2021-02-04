@@ -70,7 +70,7 @@ class CheckerActor (val id:Int, val terminaux:List[Terminal], electionActor:Acto
                }
                // We haven't leader's message in maxTicks, we confirm that leader was dead
                if(curTicks == maxTicks - 1) {
-                    if(!contains) electionActor ! Start
+                    if(!contains) electionActor ! StartWithNodeList(this.nodesAlive)
                     this.nodesAlive = List()
                }
                curTicks = (curTicks + 1) % maxTicks

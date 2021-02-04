@@ -12,6 +12,8 @@ sealed trait AliveMessage
 case class IsAlive (id:Int) extends AliveMessage
 case class IsAliveLeader (id:Int) extends AliveMessage
 
+
+
 class Node (val id:Int, val terminaux:List[Terminal]) extends Actor {
 
      // Les differents acteurs du systeme
@@ -72,6 +74,23 @@ class Node (val id:Int, val terminaux:List[Terminal]) extends Actor {
           // Message indiquant que le leader a change
           case LeaderChanged (nodeId) => {
                this.beatActor ! LeaderChanged(nodeId)
+          }
+
+          case SendLeaderMessage(msg, dest) =>{
+               println("SendLeaderMessage(" + msg.toString() + ", " + dest + ")")
+               this.allNodes(dest) ! msg
+          }
+          case ALG (list, nodeId) => {
+               println("node: ALG("+nodeId+")")
+               electionActor ! ALG(list, nodeId)
+          }
+          case AVS (list, nodeId) => {
+               println("node: AVS("+nodeId+")")               
+               electionActor ! AVS(list, nodeId)
+          }
+          case AVSRSP(list ,nodeId) => {
+               println("node: AVSRSP("+nodeId+")")
+               electionActor ! AVSRSP(list, nodeId)
           }
 
      }

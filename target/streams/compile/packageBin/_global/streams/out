@@ -46,6 +46,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/xian/APP/Projets/M2-S1/PPC/LeaderElectionScala/target/scala-2.11/classes/upmc/akka/leader/Tick.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	upmc/akka/leader/BeatLeader.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/xian/APP/Projets/M2-S1/PPC/LeaderElectionScala/target/scala-2.11/classes/upmc/akka/leader/BeatLeader.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	upmc/akka/leader/SendLeaderMessage$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/xian/APP/Projets/M2-S1/PPC/LeaderElectionScala/target/scala-2.11/classes/upmc/akka/leader/SendLeaderMessage$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	upmc/akka/leader/SyncForOneNode.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/xian/APP/Projets/M2-S1/PPC/LeaderElectionScala/target/scala-2.11/classes/upmc/akka/leader/SyncForOneNode.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	upmc/akka/leader/LeaderChanged.class[0m
@@ -120,6 +122,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/xian/APP/Projets/M2-S1/PPC/LeaderElectionScala/target/scala-2.11/classes/upmc/akka/leader/IsAlive.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	upmc/akka/leader/Message$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/xian/APP/Projets/M2-S1/PPC/LeaderElectionScala/target/scala-2.11/classes/upmc/akka/leader/Message$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	upmc/akka/leader/SendLeaderMessage.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/xian/APP/Projets/M2-S1/PPC/LeaderElectionScala/target/scala-2.11/classes/upmc/akka/leader/SendLeaderMessage.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	upmc/akka/leader/BeatMessage.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/xian/APP/Projets/M2-S1/PPC/LeaderElectionScala/target/scala-2.11/classes/upmc/akka/leader/BeatMessage.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	upmc/akka/leader/CheckerActor$$anonfun$receive$1$$anonfun$applyOrElse$3.class[0m
