@@ -24,6 +24,7 @@ class BeatActor (val id:Int) extends Actor {
      val time : Int = 50
      val father = context.parent
      var leader : Int = 0 // On estime que le premier Leader est 0
+     val scheduler = context.system.scheduler
 
      def receive = {
 
@@ -37,13 +38,11 @@ class BeatActor (val id:Int) extends Actor {
 
           // Objectif : prevenir tous les autres nodes qu'on est en vie
           case BeatTick => {
+               scheduler.scheduleOnce(time milliseconds , self, BeatTick)
                if (this.id == this.leader){
                     father !BeatLeader(this.id);
-               } else{
-                    father !Beat(this.id);
                }
-               Thread.sleep(time)
-               self ! BeatTick
+               father !Beat(this.id);               
           }
 
           case LeaderChanged (nodeId) => {
