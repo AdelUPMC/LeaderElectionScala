@@ -20,7 +20,7 @@ class CheckerActor (val id:Int, val terminaux:List[Terminal], electionActor:Acto
      var datesForChecking:List[Date] = List()
      var lastDate:Date = null
 
-     var maxTicks = 15;
+     var maxTicks = 30;
      var curTicks = 0;
      var leader : Int = -1
 
@@ -58,8 +58,6 @@ class CheckerActor (val id:Int, val terminaux:List[Terminal], electionActor:Acto
           // A chaque fois qu'on recoit un CheckerTick : on verifie qui est mort ou pas
           // Objectif : lancer l'election si le leader est mort
           case CheckerTick => {
-               var msg = "leader=" + this.leader + ", nodesAlive: " + nodesAlive.toString()
-               father ! Message(msg)
                // Check if this node is leader
                var contains = this.id == this.leader
                // Check if leader in list alive
@@ -70,6 +68,8 @@ class CheckerActor (val id:Int, val terminaux:List[Terminal], electionActor:Acto
                }
                // We haven't leader's message in maxTicks, we confirm that leader was dead
                if(curTicks == maxTicks - 1) {
+                    var msg = "leader=" + this.leader + ", nodesAlive: " + nodesAlive.toString()
+                    println(msg);
                     if(!contains) electionActor ! StartWithNodeList(this.nodesAlive)
                     this.nodesAlive = List()
                }

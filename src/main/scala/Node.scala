@@ -2,6 +2,9 @@ package upmc.akka.leader
 
 import akka.actor._
 
+import scala.collection.mutable.HashMap
+import scala.collection.mutable.Map
+
 case class Start ()
 
 sealed trait SyncMessage
@@ -22,7 +25,10 @@ class Node (val id:Int, val terminaux:List[Terminal]) extends Actor {
      val beatActor = context.actorOf(Props(new BeatActor(this.id)), name = "beatActor")
      val displayActor = context.actorOf(Props[DisplayActor], name = "displayActor")
 
+     var idToindex:Map[Int,Int]= new HashMap[Int, Int]()
      var allNodes:List[ActorSelection] = List()
+
+
 
      def receive = {
 
@@ -33,14 +39,18 @@ class Node (val id:Int, val terminaux:List[Terminal]) extends Actor {
                beatActor ! Start
 
                // Initilisation des autres remote, pour communiquer avec eux
+               
+               var index = 0
                terminaux.foreach(n => { 
                     if (n.id != id) {
                          val remote = context.actorSelection("akka.tcp://LeaderSystem" + n.id + "@" + n.ip + ":" + n.port + "/user/Node")
                          // Mise a jour de la liste des nodes
                          this.allNodes = this.allNodes:::List(remote)
+                         idToindex+=(n.id-> index)
+                         index+=1
                     }
-               
                })
+               println(idToindex)
           }
 
           // Envoi de messages (format texte)
@@ -78,7 +88,9 @@ class Node (val id:Int, val terminaux:List[Terminal]) extends Actor {
 
           case SendLeaderMessage(msg, dest) =>{
                println("SendLeaderMessage(" + msg.toString() + ", " + dest + ")")
-               this.allNodes(dest) ! msg
+               var index:Int = idToindex.getOrElse(dest, 0)
+               this.allNodes(index) ! msg
+
           }
           case ALG (list, nodeId) => {
                println("node: ALG("+nodeId+")")
