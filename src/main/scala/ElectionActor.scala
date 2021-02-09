@@ -5,11 +5,11 @@ import scala.concurrent.duration._
 
 
 abstract class NodeStatus
-case object Passive extends NodeStatus
-case object Candidate  extends NodeStatus
-case object Dummy  extends NodeStatus
-case object Waiting  extends NodeStatus
-case object Leader extends NodeStatus
+case class Passive () extends NodeStatus
+case class Candidate () extends NodeStatus
+case class Dummy () extends NodeStatus
+case class Waiting () extends NodeStatus
+case class Leader () extends NodeStatus
 
 abstract class LeaderAlgoMessage
 case class Initiate () extends LeaderAlgoMessage
@@ -27,110 +27,109 @@ class ElectionActor (val id:Int, val terminaux:List[Terminal]) extends Actor {
 
      val father = context.parent
      var nodesAlive:List[Int] = List(id)
+     var allNodes:List[ActorSelection] = List()
 
      var candSucc:Int = -1
      var candPred:Int = -1
-     var status:NodeStatus =  Passive
+     var status:NodeStatus = new Passive ()
 
-     def getSucc(i:Int):Int={
-          var n = i
+     def neighboor(nodeId:Int):Int={
+          var n = this.nodesAlive.indexOf(nodeId)
           do{
-               n = (n + 1) % 4
+               n = (n + 1) % terminaux.length
           }while(!nodesAlive.contains(n))
           return n
      }
 
-     def startLeader(){
-          father ! LeaderChanged(id)
-          context.stop(self)
+     def getNode(nodeId:Int):ActorSelection = {
+         return this.allNodes(nodeId)
      }
 
-     def receive = {
 
+     def receive = {
           // Initialisation
           case Start => {
-               father ! Message("Leader election start")
                self ! Initiate
           }
 
           case StartWithNodeList (list) => {
-               father ! Message("Leader election start, alive: " + list.toString())
+               println("LeaderElection start ...")
+               if (this.allNodes.length < 4){
+                    println("first start")
+                    terminaux.foreach(n => {
+                         val remote = context.actorSelection("akka.tcp://LeaderSystem" + n.id + "@" + n.ip + ":" + n.port + "/user/Node")
+                         this.allNodes = this.allNodes:::List(remote)
+                    })
+               }
+
                if (list.isEmpty) {
                     this.nodesAlive = this.nodesAlive:::List(id)
                }
                else {
                     this.nodesAlive = list
                }
-
-               // Debut de l'algorithme d'election
                self ! Initiate
           }
 
           case Initiate => {
-               println("Initiate")
-               this.status = Candidate;
-               var next = getSucc(this.id)
-               father ! SendLeaderMessage(ALG(this.nodesAlive, this.id), next)
+               this.status = new Candidate() 
+               val neighboor = this.neighboor(id)
+               getNode(neighboor) ! ALG (this.nodesAlive, id)
           }
 
           case ALG (list, init) => {
-               println("ALG(" + init + ")")
-               if (this.status ==  Passive){
-                    this.status =  Dummy
-                    father ! SendLeaderMessage(ALG(list, init), getSucc(id))
-               } else if(this.status == Candidate){
-                    candPred = init
-                    if(this.id > init){
-                         if(candSucc == -1){
-                              this.status = Waiting
-                              father ! SendLeaderMessage(AVS(list, id), init)
-                         }else{
-                              father ! SendLeaderMessage(AVSRSP(list, candPred), candSucc)
-                              status = Dummy
+               if(this.status.equals(Passive())) {
+                    this.status = new Dummy()
+                    val neighboor = this.neighboor(id)
+                    getNode(neighboor) ! ALG (this.nodesAlive, id)
+               }
+               else if(this.status.equals(Candidate())) {
+                    this.candPred = init
+                    if(id > init) {
+                         if(this.candSucc == -1) {
+                              this.status = new Waiting()
+                              getNode(init) ! AVS (this.nodesAlive, id)
+                         } else {
+                              getNode(this.candSucc) ! AVSRSP (this.nodesAlive, this.candPred)
+                              this.status = new Dummy()
                          }
-                    } else if (id == init){
-                         status = Leader
-                         startLeader()
+                    }
+                    if(init == id) {
+                         this.status = new Leader()
+                         father ! LeaderChanged (id)
                     }
                }
           }
 
           case AVS (list, j) => {
-               println("AVS(" + j + ")")
-               if(status == Candidate) {
-                    if(candPred == -1){
-                         candSucc = j
-                         // scheduler.scheduleOnce(100 milliseconds, self, AVS(list, j))   
-                    } else{
-                         father != SendLeaderMessage(AVSRSP(list, candPred), j)
-                         status = Dummy
+               if(this.status.equals(Candidate())) {
+                    if(this.candPred == -1)
+                         this.candSucc = j
+                    else { 
+                         getNode(j) ! AVSRSP(this.nodesAlive, this.candPred)
+                         this.status = new Dummy()
                     }
-               } else if( status == Waiting) {
-                    candSucc = j
-               }
+               } else if(this.status.equals(Waiting()))
+                         this.candSucc = j
           }
 
           case AVSRSP (list, k) => {
-               println("AVSRSP(" + k + ")")
-               if (status == Waiting) {
-                    if(id == k) {
-                         status = Leader
-                         startLeader()
-                    } else{
-                         candPred = k
-                         if(candSucc == -1){
-                              if(k < id){
-                                   status = Waiting
-                                   father ! SendLeaderMessage(AVS(list, id), k)
+               if(this.status.equals(Waiting())) {
+                    if(this.id == k)
+                         this.status = new Leader()
+                    else {
+                         this.candPred = k
+                         if (this.candSucc == -1) {
+                              if(k < this.id) {
+                                   this.status = new Waiting()
+                                   getNode(k) ! AVS(this.nodesAlive, this.id)
                               }
-                         } else{
-                              status = Dummy
-                              father ! SendLeaderMessage(AVSRSP(list, k), candSucc)
-                         }
+                         } else {
+                              this.status = new Dummy()
+                              getNode(this.candSucc) ! AVSRSP(nodesAlive, k)
+                         } 
                     }
                }
           }
-
      }
-
 }
