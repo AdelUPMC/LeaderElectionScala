@@ -21,29 +21,29 @@ case class LeaderChanged (nodeId:Int)
 
 class BeatActor (val id:Int) extends Actor {
 
-     val time : Int = 50
+     val time : Int = 100
      val father = context.parent
      var leader : Int = 0 // On estime que le premier Leader est 0
-
+     val scheduler = context.system.scheduler
+     
      def receive = {
 
           // Initialisation
           case Start => {
                self ! BeatTick
-               if (this.id == this.leader) {
+               /*if (this.id == this.leader) {
                     father ! Message ("I am the leader")
-               }
+               }*/
           }
 
           // Objectif : prevenir tous les autres nodes qu'on est en vie
           case BeatTick => {
+               scheduler.scheduleOnce(time milliseconds , self, BeatTick)
                if (this.id == this.leader){
-                    father !BeatLeader(this.id);
-               } else{
-                    father !Beat(this.id);
+                    father ! Message ("I am the leader")
+                    father ! BeatLeader (this.id);
                }
-               Thread.sleep(time)
-               self ! BeatTick
+               father !Beat(this.id); 
           }
 
           case LeaderChanged (nodeId) => {
