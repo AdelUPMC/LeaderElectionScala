@@ -65,7 +65,10 @@ class Node (val id:Int, val terminaux:List[Terminal]) extends Actor {
           case LeaderChanged (nodeId) => {
                beatActor ! LeaderChanged(nodeId)
           }
-          
+
+          case SendLeaderMessage(msg, destId) => {
+               this.allNodes(destId) ! msg
+          }
           case ALG(list, nodeId) => {
                electionActor ! ALG(list, nodeId)
           }
