@@ -54,10 +54,9 @@ class CheckerActor (val id:Int, val terminaux:List[Terminal], electionActor:Acto
 
           // A chaque fois qu'on recoit un Beat : on met a jour la liste des nodes
           case IsAlive (nodeId) => {
-               if (!this.nodesAlive.contains(nodeId))
-               {
+               if (!this.nodesAlive.contains(nodeId)) {
                     this.nodesAlive = this.nodesAlive:::List(nodeId)
-                    father ! Message ("Nodes Alive : (" + this.nodesAlive.mkString(", ") + ")")
+                    father ! Message ("Leader:" + leader + "; nodesAlive:" + this.nodesAlive.toString())
                }
           }
 
@@ -66,6 +65,8 @@ class CheckerActor (val id:Int, val terminaux:List[Terminal], electionActor:Acto
           // A chaque fois qu'on recoit un CheckerTick : on verifie qui est mort ou pas
           // Objectif : lancer l'election si le leader est mort
           case CheckerTick => {
+               if(leader == id) father ! Message ("I am the leader")
+
                var actorId = 0
                for(actorId <- 0 to this.allNodes.length - 1) {
                     if (actorId != id && this.nodesAlive.contains(actorId)) {
@@ -75,8 +76,7 @@ class CheckerActor (val id:Int, val terminaux:List[Terminal], electionActor:Acto
 
                               case Failure(ex) => {
                                    this.nodesAlive =  this.nodesAlive.filter(_ != actorId)
-                                   father ! Message ("Leader : "+ this.leader + "; Nodes Alive : (" + this.nodesAlive.mkString(", ") + ")")
-                                   
+                                   father ! Message ("Leader:" + leader + "; nodesAlive:" + this.nodesAlive.toString())
                                    if(actorId == leader)
                                    {
                                         electionActor ! StartWithNodeList (this.nodesAlive)
